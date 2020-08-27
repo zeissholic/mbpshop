@@ -1,0 +1,49 @@
+version: 0.2
+
+#env:
+  #variables:
+     # key: "value"
+     # key: "value"
+  #parameter-store:
+     # key: "value"
+     # key: "value"
+  #git-credential-helper: yes
+
+phases:
+  install:
+    #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
+    #If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
+    runtime-versions:
+      java: openjdk8
+    #commands:
+      # - command
+      # - command
+  #pre_build:
+    #commands:
+      # - command
+  build:
+    commands:
+      - echo build starting on `date`
+      - chmod +x ./build.sh
+      - pwd
+      - ./build.sh
+  #post_build:
+    #commands:
+      # - command
+      # - command
+artifacts:
+  type: "S3"
+  #files:
+  #   - shop.zip
+  files:
+    - shop.war
+    - appspec.yml
+    - scripts/*.sh
+  packaging: "ZIP"
+  name: "shop.zip"
+  # name: shop.zip
+  #discard-paths: yes
+  #base-directory: location
+#cache:
+  #paths:
+    # - paths

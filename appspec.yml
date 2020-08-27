@@ -1,0 +1,33 @@
+version: 0.0
+os: linux
+files:
+  - source: shop.war
+    destination: /opt/tomcat/latest/webapps
+
+permissions:
+  - object: /opt/tomcat/latest/webapps
+    pattern: "shop.war"
+    owner: tomcat
+    group: tomcat
+    mode: 744
+    type:
+      - file
+
+
+hooks:
+  BeforeInstall:
+    - location: scripts/pre-deployment.sh
+      timeout: 300
+      runas: root 
+  AfterInstall:
+    - location: scripts/post-deployment.sh
+      timeout: 300
+      runas: root 
+  ApplicationStart:
+    - location: scripts/startservice.sh
+      timeout: 300
+      runas: root 
+  ApplicationStop:
+    - location: scripts/stopservice.sh
+      timeout: 300
+      runas: root 
