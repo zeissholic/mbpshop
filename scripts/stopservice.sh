@@ -1,1 +1,1 @@
-service tomcat stop
+sudo systemctl stop tomcat
